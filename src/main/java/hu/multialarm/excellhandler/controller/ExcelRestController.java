@@ -2,6 +2,7 @@ package hu.multialarm.excellhandler.controller;
 
 import hu.multialarm.excellhandler.model.excell.Excel;
 import hu.multialarm.excellhandler.services.ExcelService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,7 @@ public class ExcelRestController {
 		}
 	}
 	
+	@Transactional
 	@GetMapping("/delete/{fileName}")
 	public ResponseEntity<?> deleteByFilename(@PathVariable("fileName") String fileName) {
 		try {

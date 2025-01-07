@@ -28,7 +28,7 @@ public class ExcelService {
 		return repository.findById(id);
 	}
 	
-	public Optional<Excel> findByFilename(String fileName) {
+	public List<Excel> findByFilename(String fileName) {
 		return repository.findByFileName(fileName);
 	}
 	
