@@ -1,0 +1,16 @@
+package hu.multialarm.excellhandler.repository;
+
+import hu.multialarm.excellhandler.model.excell.Excel;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface ExcellRepository extends JpaRepository<Excel, Long> {
+	
+	Optional<Excel> findByFileName(@NotNull String fileName);
+	
+	void deleteByFileName(@NotNull String fileName);
+}
