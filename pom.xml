@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>hu.multialarm</groupId>
 	<artifactId>excellhandler</artifactId>
-	<version>0.0.1</version>
+	<version>0.3.8</version>
 	<name>excellhandler</name>
 	<description>Read in excell file, save contents to different DB tables</description>
 	<url/>
