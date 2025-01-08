@@ -1,7 +1,7 @@
 package hu.multialarm.excellhandler.services;
 
-import hu.multialarm.excellhandler.model.excell.Excel;
-import hu.multialarm.excellhandler.repository.ExcellRepository;
+import hu.multialarm.excellhandler.model.excel.Excel;
+import hu.multialarm.excellhandler.repository.ExcelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.Optional;
 @Service
 public class ExcelService {
 	
-	private ExcellRepository repository;
+	private ExcelRepository repository;
 	
-	public ExcelService(ExcellRepository repository) {
+	public ExcelService(ExcelRepository repository) {
 		this.repository = repository;
 	}
 	
@@ -24,23 +24,23 @@ public class ExcelService {
 		return repository.findAll();
 	}
 	
-	public Optional<Excel> findByID(Long id) {
+	public Optional<Excel> findById(Long id) {
 		return repository.findById(id);
 	}
 	
 	public List<Excel> findByFilename(String fileName) {
 		return repository.findByFileName(fileName);
 	}
-	
+
+	public void deleteByFileName(String fileName) {
+		repository.deleteByFileName(fileName);
+	}
+
 	public void deleteEntity(Excel excel) {
 		repository.delete(excel);
 	}
-	
-	public void deleteByID(Long id) {
+
+	public void deleteById(Long id) {
 		repository.deleteById(id);
-	}
-	
-	public void deleteByName(String fileName) {
-		repository.deleteByFileName(fileName);
 	}
 }

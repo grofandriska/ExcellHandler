@@ -1,14 +1,17 @@
-# ExcellHandler Author Gróf András
-
+# Excel Handler 
+# Author : András Gróf
+ 
+----------------------------------------------------------------------------------------------------------------
 # Change Log: 
 
 # 0.0.1
 
 - Starter commit with file structure and dependencies copied to pom.xml
 
+----------------------------------------------------------------------------------------------------------------
 # 0.3.1
 
-Domain: /api
+- Domain: /api 
 
 - /upload ---> Creates 2 test object into EXCEL table (GET)
 
@@ -18,13 +21,32 @@ Domain: /api
 
 - /delete/{fileName} ---> Deletes object from EXCEL table by filename
 
-- example : http://localhost:8080/api/downloadName/Mummy
-
-----------------------------------------------------------------------------------------------------------------
 
 - File structure extended with packages (Repo,Service,Model,Controller,Util)
+
 - Model java files added (Excel, Sheet, SheetRow, SheetColumn)
-- Repositories was added (-"-) and ExcellRepository findByName extension
+
+- Repositories added (-"-) and ExcelRepository findByName extension
+
 - ExcelService added and implements repository CRUD methods (not all)
-- ExcellController created with endpoints:
+
+- ExcelController created with endpoints:
+
+----------------------------------------------------------------------------------------------------------------
+# 0.3.8
+
+- ExcelRestController was refactored ,the endpoints changed to /list /delete /find
+  URI ---> "/api/sheet/column"
+
+- SheetService implementation started with Create and Read methods
+
+- SheetColumnService implementation started with C.R.D methods 
+
+- Converter class implementation started (convert : Optional <?>  ---> ?)
+
+- Extended with Utilizer class (temp) to populate DB-s. 
+
+- SheetColumnController implementation started on "/api/sheet/column"
+  with endpoint: "/downloadBySheetId/{id}"
+
 

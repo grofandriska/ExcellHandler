@@ -1,4 +1,4 @@
-package hu.multialarm.excellhandler.model.excell;
+package hu.multialarm.excellhandler.model.excel;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -22,4 +22,6 @@ public class SheetRow {
 	
 	@NotNull
 	private String valueText;
+
+
 }

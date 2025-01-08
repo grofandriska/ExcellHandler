@@ -1,14 +1,12 @@
-package hu.multialarm.excellhandler.model.excell;
+package hu.multialarm.excellhandler.model.excel;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
-@Data
 @NoArgsConstructor
 public class Sheet {
 	
@@ -23,5 +21,28 @@ public class Sheet {
 	
 	@NotNull
 	private String sheetName;
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Excel getExcel() {
+		return excel;
+	}
+
+	public void setExcel(Excel excel) {
+		this.excel = excel;
+	}
+
+	public String getSheetName() {
+		return sheetName;
+	}
+
+	public void setSheetName(String sheetName) {
+		this.sheetName = sheetName;
+	}
 }
