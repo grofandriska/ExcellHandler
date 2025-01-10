@@ -2,6 +2,12 @@
 # Author : András Gróf
 
  *Sry for not complete changeLog
+ 
+ The webserver is capable of saving and storeing an Excel file, and save it's content to different databases.
+
+try out on: 
+ Visit localhost8080:api/excel/index. 
+ 
 ----------------------------------------------------------------------------------------------------------------
 # Change Log: 
 
