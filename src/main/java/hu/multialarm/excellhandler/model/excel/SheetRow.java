@@ -3,11 +3,15 @@ package hu.multialarm.excellhandler.model.excel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Data
 @Entity
+@Getter
+@Setter
 public class SheetRow {
 
 	@Id
@@ -25,5 +29,35 @@ public class SheetRow {
 	@NotNull
 	private String valueText;
 
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getRowOrderNumber() {
+		return rowOrderNumber;
+	}
+
+	public void setRowOrderNumber(Integer rowOrderNumber) {
+		this.rowOrderNumber = rowOrderNumber;
+	}
+
+	public SheetColumn getSheetColumn() {
+		return sheetColumn;
+	}
+
+	public void setSheetColumn(SheetColumn sheetColumn) {
+		this.sheetColumn = sheetColumn;
+	}
+
+	public String getValueText() {
+		return valueText;
+	}
+
+	public void setValueText(String valueText) {
+		this.valueText = valueText;
+	}
 }

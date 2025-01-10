@@ -5,6 +5,7 @@ import hu.multialarm.excellhandler.model.excel.Excel;
 import hu.multialarm.excellhandler.model.excel.Sheet;
 import hu.multialarm.excellhandler.model.excel.SheetColumn;
 
+import hu.multialarm.excellhandler.model.excel.SheetRow;
 import hu.multialarm.excellhandler.services.ExcelService;
 import hu.multialarm.excellhandler.services.SheetColumnService;
 import hu.multialarm.excellhandler.services.SheetRowService;
@@ -21,9 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 @NoArgsConstructor
@@ -69,7 +68,7 @@ public class Reader {
                 SheetColumn sheetColumn;
 
                 Row row = sheet.getRow(0);
-
+                List<SheetColumn> sheetColumnList = new ArrayList<>();
                 List<Cell> cellList = new ArrayList<>();
                 for (int i1 = 0; i1 < row.getLastCellNum(); i1++) {
 
@@ -85,10 +84,22 @@ public class Reader {
                         cellList.add(cell);
                     }
                     sheetColumn.setColumnType(getCellType(cellList.get(i1)));
-                    sheetColumnService.save(sheetColumn);
+                    sheetColumnList.add(sheetColumnService.save(sheetColumn));
                 }
-                //***************************** End of Create and Save Column ******************/////
-                //***************************** Create and Save Rows ******************/////
+                int rows = sheet.getLastRowNum();
+                int columns = row.getLastCellNum();
+
+                for (int ix = 0; ix < rows; ix++) {
+                    for (int j = 0; j < columns; j++) {
+                        SheetRow sheetRow = new SheetRow();
+                        sheetRow.setRowOrderNumber(ix);
+
+                        sheetRow.setSheetColumn(sheetColumnList.get(j));
+
+                        sheetRow.setValueText(getCellType(sheet.getRow(ix).getCell(j)));
+                        sheetRowService.save(sheetRow);
+                    }
+                }
             }
             file.close();
         } catch (FileNotFoundException e) {
@@ -98,7 +109,6 @@ public class Reader {
         }
         return "Siker";
     }
-
 
     private String getCellType(Cell cell) {
         String dataType;

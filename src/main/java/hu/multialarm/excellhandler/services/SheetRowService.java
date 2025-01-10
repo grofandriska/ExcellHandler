@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class SheetRowService {
 
     private SheetRowRepository sheetRowRepository;
 
+    public SheetRowService(SheetRowRepository sheetRowRepository) {
+        this.sheetRowRepository = sheetRowRepository;
+    }
 
     public SheetRow save(SheetRow sheetRow){
         return sheetRowRepository.save(sheetRow);
