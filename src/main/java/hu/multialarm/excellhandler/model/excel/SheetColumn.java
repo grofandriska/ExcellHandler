@@ -2,12 +2,14 @@ package hu.multialarm.excellhandler.model.excel;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class SheetColumn {
 	
 	@Id
@@ -23,11 +25,15 @@ public class SheetColumn {
 	@NotNull
 	private String columnType;
 
-	//TODO: Szerintem elég A Sheet ID, viszont akkor ide nem adhatunk kapcsolatot?!
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "sheet_id", nullable = false)
 	private Sheet sheet;
+
+
+
+
+
 
 	public Long getId() {
 		return id;

@@ -17,8 +17,8 @@ public class SheetColumnService {
         this.repository = repository;
     }
 
-    public void save(SheetColumn sheetColumn) {
-        repository.save(sheetColumn);
+    public SheetColumn save(SheetColumn sheetColumn) {
+        return  repository.save(sheetColumn);
     }
 
 
@@ -29,7 +29,6 @@ public class SheetColumnService {
     public List<SheetColumn> getAllSheetColumnBySheetId(Sheet sheet) {
         return this.repository.findSheetColumnsBySheet(sheet);
     }
-
     public Optional<SheetColumn> getSheetColumnById(Long id) {
         return repository.findById(id);
     }

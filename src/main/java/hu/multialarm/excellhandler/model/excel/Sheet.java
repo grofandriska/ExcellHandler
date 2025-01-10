@@ -2,12 +2,15 @@ package hu.multialarm.excellhandler.model.excel;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Sheet {
 	
 	@Id
@@ -16,11 +19,14 @@ public class Sheet {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "excel_id", nullable = false)
+	@JoinColumn(name = "excel_id")
 	private Excel excel;
 	
 	@NotNull
 	private String sheetName;
+
+
+
 
 	public Long getId() {
 		return id;

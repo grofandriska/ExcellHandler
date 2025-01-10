@@ -25,7 +25,7 @@ public class SheetColumnController {
         this.sheetColumnService = sheetColumnService;
     }
 
-    @GetMapping("/downloadBySheetId/{id}")
+    @GetMapping("/find/bysheetid/{id}")
     public ResponseEntity<?> getSheetColumnBySheetId(@PathVariable("id") Long id) {
         try {
             return ResponseEntity.ok(sheetColumnService.getAllSheetColumnBySheetId (converter.convertToSheet(id)));
@@ -33,8 +33,6 @@ public class SheetColumnController {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
-
-
 }
 
 

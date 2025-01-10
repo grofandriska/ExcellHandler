@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>hu.multialarm</groupId>
-	<artifactId>excellhandler</artifactId>
-	<version>0.3.8</version>
-	<name>excellhandler</name>
-	<description>Read in excell file, save contents to different DB tables</description>
+	<artifactId>excelDR</artifactId>
+	<version>0.6.1</version>
+	<name>excel-handler</name>
+	<description>Read in Excel file, save contents to different DB tables</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -29,10 +29,15 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -1,34 +1,47 @@
 package hu.multialarm.excellhandler.controller;
 
-import hu.multialarm.excellhandler.model.excel.Excel;
 import hu.multialarm.excellhandler.services.ExcelService;
-import hu.multialarm.excellhandler.util.Utilitizer;
+import hu.multialarm.excellhandler.util.Reader;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
 
-@RestController
+@Controller
 @RequestMapping("/api/excel")
-@AllArgsConstructor
 public class ExcelRestController {
 
+    private Reader reader;
     private ExcelService excelService;
 
-    private Utilitizer utilitizer;
+    public ExcelRestController(ExcelService excelService,Reader reader) {
+        this.excelService = excelService;
+        this.reader = reader;
+    }
 
-    @GetMapping("/upload")
-    public ResponseEntity<String> uploadExcel() {
+    @GetMapping("/index")
+    public String index() {
+        return "uploadForm";
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body("No file selected!");
+        }
         try {
-            List<Excel> list = utilitizer.generateExcellList();
-            for (Excel e : list) {
-                excelService.save(e);
-            }
-            return ResponseEntity.ok("Excel data uploaded and processed successfully.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to process file: " + e.getMessage());
+            String uploadDir = "/";
+            File uploadedFile = new File(uploadDir + file.getOriginalFilename());
+            file.transferTo(uploadedFile);
+            reader.saveDataFromExcelToDatabases(file.getOriginalFilename());
+            return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Failed to upload file: " + e.getMessage());
         }
     }
 

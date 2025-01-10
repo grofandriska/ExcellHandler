@@ -1,5 +1,6 @@
 package hu.multialarm.excellhandler.services;
 
+import hu.multialarm.excellhandler.model.excel.Excel;
 import hu.multialarm.excellhandler.model.excel.Sheet;
 import hu.multialarm.excellhandler.model.excel.SheetColumn;
 import hu.multialarm.excellhandler.repository.SheetRepository;
@@ -21,9 +22,16 @@ public class SheetService {
         return repository.findById(id);
     }
 
-    public void saveSheet(Sheet sheet) {
-        repository.save(sheet);
+    public Sheet saveSheet(Sheet sheet) {
+       return repository.save(sheet);
     }
+    public Sheet createSheet(String sheetName, Excel excel) {
+        Sheet sheet = new Sheet();
+        sheet.setSheetName(sheetName);
+        sheet.setExcel(excel);
+        return saveSheet(sheet);
+    }
+
 
     public List<Sheet> listAllSheet() {
         return repository.findAll();
