@@ -1,6 +1,7 @@
 # Excel Handler 
 # Author : András Gróf
- 
+
+ *Sry for not complete changeLog
 ----------------------------------------------------------------------------------------------------------------
 # Change Log: 
 
@@ -48,5 +49,13 @@
 
 - SheetColumnController implementation started on "/api/sheet/column"
   with endpoint: "/downloadBySheetId/{id}"
+
+  ----------------------------------------------------------------------------------------------------------------
+# 0.7.0
+
+- Extended refactors
+- File transfer implemented ( and file save on Server root ,then extract data from this server file) on URI: /api/excel/index
+- Reader class saveDataFromExcelToDatabases() that saves the 4 kinds of objects into Database (EXCEL, SHEET, SHEETCOLUMN, SHEETROW) done
+  
 
 
