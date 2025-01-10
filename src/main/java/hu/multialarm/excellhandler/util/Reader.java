@@ -42,15 +42,13 @@ public class Reader {
         this.sheetRowService = sheetRowService;
     }
 
-    public String saveDataFromExcelToDatabases(String pathName) {
-        FileInputStream file = null;
-        Workbook workbook = null;
-
+    public void saveDataFromExcelToDatabases(String pathName) {
         Excel excel;
+        FileInputStream file;
+        Workbook workbook;
 
         try {
-            file = new FileInputStream(new File(pathName));
-            excel = excelService.createExcelAndSave(pathName);
+            file = new FileInputStream(pathName);
 
             workbook = WorkbookFactory.create(file);
 
@@ -58,85 +56,24 @@ public class Reader {
 
             int numberOfSheets = workbook.getNumberOfSheets();
 
+            excel = excelService.createExcelAndSave(pathName);
+            //Iterate over sheets from workbook
             for (int i = 0; i < numberOfSheets; i++) {
-                //*****************************Create and Save Sheet******************/////
                 sheet = workbook.getSheetAt(i);
-
-                Sheet sheet2 = sheetService.createSheet(sheet.getSheetName(), excel);
-
-                //***************************** Create and Save Columns* *****************/////
-                SheetColumn sheetColumn;
-
-                Row row = sheet.getRow(0);
-                List<SheetColumn> sheetColumnList = new ArrayList<>();
-                List<Cell> cellList = new ArrayList<>();
-                for (int i1 = 0; i1 < row.getLastCellNum(); i1++) {
-
-                    sheetColumn = new SheetColumn();
-                    sheetColumn.setSheet(sheet2);
-                    sheetColumn.setColumnName(row.getCell(i1).getStringCellValue());
-                    sheetColumn.setOrderNumber(i1);
-
-                    Row row1 = sheet.getRow(1);
-                    Iterator<Cell> cellIteratorFoType = row1.cellIterator();
-                    while (cellIteratorFoType.hasNext()) {
-                        Cell cell = cellIteratorFoType.next();
-                        cellList.add(cell);
-                    }
-                    sheetColumn.setColumnType(getCellType(cellList.get(i1)));
-                    sheetColumnList.add(sheetColumnService.save(sheetColumn));
-                }
-                int rows = sheet.getLastRowNum();
-                int columns = row.getLastCellNum();
-
-                for (int ix = 0; ix < rows; ix++) {
-                    for (int j = 0; j < columns; j++) {
-                        SheetRow sheetRow = new SheetRow();
-                        sheetRow.setRowOrderNumber(ix);
-
-                        sheetRow.setSheetColumn(sheetColumnList.get(j));
-
-                        sheetRow.setValueText(getCellType(sheet.getRow(ix).getCell(j)));
-                        sheetRowService.save(sheetRow);
-                    }
-                }
+                //Save Sheet
+                Sheet excelSheet = sheetService.createSheet(sheet.getSheetName(), excel);
+                //Save Columns
+                List<SheetColumn> sheetColumnList = sheetColumnService.createAndSave(sheet, excelSheet);
+                //Save Rows
+                sheetRowService.saveSheetRows(sheet, sheetColumnList);
             }
+            workbook.close();
             file.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return "Siker";
     }
 
-    private String getCellType(Cell cell) {
-        String dataType;
-        if (cell != null) {
-            switch (cell.getCellType()) {
-                case STRING:
-                    dataType = "String";
-                    break;
-                case NUMERIC:
-                    if (DateUtil.isCellDateFormatted(cell)) {
-                        dataType = "Date";
-                    } else {
-                        dataType = "Numeric";
-                    }
-                    break;
-                case BOOLEAN:
-                    dataType = "Boolean";
-                    break;
-                case FORMULA:
-                    dataType = "Formula";
-                    break;
-                default:
-                    System.out.println("I am Unknown");
-                    dataType = "Unknown";
-            }
-        } else {
-            throw new NullPointerException("A cella NULL volt!");
-        }
-        return dataType;
-    }
 }

@@ -18,12 +18,12 @@ public class SheetService {
         this.repository = repository;
     }
 
-    public Optional<Sheet> findBySheetId(Long id) {
-        return repository.findById(id);
-    }
-
     public Sheet saveSheet(Sheet sheet) {
        return repository.save(sheet);
+    }
+
+    public Optional<Sheet> findBySheetId(Long id) {
+        return repository.findById(id);
     }
     public Sheet createSheet(String sheetName, Excel excel) {
         Sheet sheet = new Sheet();
@@ -31,8 +31,6 @@ public class SheetService {
         sheet.setExcel(excel);
         return saveSheet(sheet);
     }
-
-
     public List<Sheet> listAllSheet() {
         return repository.findAll();
     }
