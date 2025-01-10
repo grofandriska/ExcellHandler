@@ -1,4 +1,4 @@
-package hu.multialarm.excellhandler.model.excel;
+package hu.multialarm.excelhandler.model.excel;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

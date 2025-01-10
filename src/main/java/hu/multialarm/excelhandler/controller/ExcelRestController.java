@@ -1,7 +1,7 @@
-package hu.multialarm.excellhandler.controller;
+package hu.multialarm.excelhandler.controller;
 
-import hu.multialarm.excellhandler.services.ExcelService;
-import hu.multialarm.excellhandler.util.Reader;
+import hu.multialarm.excelhandler.service.ExcelService;
+import hu.multialarm.excelhandler.util.ExcelFileReader;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,12 +15,13 @@ import java.io.IOException;
 @RequestMapping("/api/excel")
 public class ExcelRestController {
 
-    private Reader reader;
-    private ExcelService excelService;
+    private final ExcelService excelService;
+    private final ExcelFileReader excelFileReader;
 
-    public ExcelRestController(ExcelService excelService,Reader reader) {
+    public ExcelRestController(ExcelService excelService,
+                               ExcelFileReader excelFileReader) {
         this.excelService = excelService;
-        this.reader = reader;
+        this.excelFileReader = excelFileReader;
     }
 
     @GetMapping("/index")
@@ -37,7 +38,9 @@ public class ExcelRestController {
             String uploadDir = "/";
             File uploadedFile = new File(uploadDir + file.getOriginalFilename());
             file.transferTo(uploadedFile);
-            reader.saveDataFromExcelToDatabases(file.getOriginalFilename());
+
+            excelFileReader.saveDataFromExcelToDatabases(file.getOriginalFilename());
+
             return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +49,7 @@ public class ExcelRestController {
     }
 
     @GetMapping("/find/all")
-    public ResponseEntity<?> listAllExcell() {
+    public ResponseEntity<?> listAllExcel() {
         try {
             return ResponseEntity.ok(excelService.findAll());
         } catch (Exception e) {
@@ -55,7 +58,7 @@ public class ExcelRestController {
     }
 
     @GetMapping("/find/{fileName}")
-    public ResponseEntity<?> findByFileName(@PathVariable("fileName") String fileName) {
+    public ResponseEntity<?> findExelByFileName(@PathVariable("fileName") String fileName) {
         try {
             return ResponseEntity.ok(excelService.findByFilename(fileName));
         } catch (Exception e) {
@@ -65,7 +68,7 @@ public class ExcelRestController {
 
     @Transactional
     @GetMapping("/delete/{fileName}")
-    public ResponseEntity<?> deleteByFilename(@PathVariable("fileName") String fileName) {
+    public ResponseEntity<?> deleteExcelByFilename(@PathVariable("fileName") String fileName) {
         try {
             excelService.deleteByFileName(fileName);
             return ResponseEntity.ok("Excel with filename: " + fileName + " was deleted successfully!");

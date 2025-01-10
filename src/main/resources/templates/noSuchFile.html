@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hiba a feltöltés során</title>
+</head>
+<body>
+<h1>Nem találtam ilyen fájlt</h1>
+<form th:action="@{/api/excel/index}" method="get">
+    <button type="submit">Vissza a főoldalra</button>
+</form>
+<p th:if="${message}" th:text="${message}"></p>
+</body>
+</html>

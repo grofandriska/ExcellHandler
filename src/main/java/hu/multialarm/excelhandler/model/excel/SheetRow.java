@@ -1,17 +1,9 @@
-package hu.multialarm.excellhandler.model.excel;
+package hu.multialarm.excelhandler.model.excel;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.List;
-
-@Data
 @Entity
-@Getter
-@Setter
 public class SheetRow {
 
 	@Id

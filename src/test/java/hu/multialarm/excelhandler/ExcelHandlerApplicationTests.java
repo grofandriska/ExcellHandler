@@ -1,10 +1,10 @@
-package hu.multialarm.excellhandler;
+package hu.multialarm.excelhandler;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ExcellhandlerApplicationTests {
+class ExcelHandlerApplicationTests {
 
 	@Test
 	void contextLoads() {

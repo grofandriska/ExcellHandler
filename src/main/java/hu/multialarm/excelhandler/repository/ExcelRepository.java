@@ -1,6 +1,6 @@
-package hu.multialarm.excellhandler.repository;
+package hu.multialarm.excelhandler.repository;
 
-import hu.multialarm.excellhandler.model.excel.Excel;
+import hu.multialarm.excelhandler.model.excel.Excel;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

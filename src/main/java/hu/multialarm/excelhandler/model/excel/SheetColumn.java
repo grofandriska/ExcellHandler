@@ -1,4 +1,4 @@
-package hu.multialarm.excellhandler.model.excel;
+package hu.multialarm.excelhandler.model.excel;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -29,10 +29,6 @@ public class SheetColumn {
 	@ManyToOne
 	@JoinColumn(name = "sheet_id", nullable = false)
 	private Sheet sheet;
-
-
-
-
 
 
 	public Long getId() {

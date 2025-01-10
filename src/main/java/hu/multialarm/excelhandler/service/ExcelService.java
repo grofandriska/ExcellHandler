@@ -1,8 +1,8 @@
-package hu.multialarm.excellhandler.services;
+package hu.multialarm.excelhandler.service;
 
-import hu.multialarm.excellhandler.model.excel.Excel;
-import hu.multialarm.excellhandler.model.excel.Sheet;
-import hu.multialarm.excellhandler.repository.ExcelRepository;
+import hu.multialarm.excelhandler.model.excel.Excel;
+
+import hu.multialarm.excelhandler.repository.ExcelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
