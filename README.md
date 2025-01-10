@@ -8,7 +8,7 @@
 
 # 0.7.5
 
-- Domain /api/excel
+- Domain localhost:8080/api/excel/index
 
 - **Refactors**: boilerplate and unused classes and codes were removed (Converter class, Controller classes,Service class and methods...)
 
