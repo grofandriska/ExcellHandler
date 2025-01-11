@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>hu.multialarm</groupId>
 	<artifactId>excelDR</artifactId>
-	<version>0.8.0</version>
+	<version>0.8.4</version>
 	<name>excel-handler</name>
 	<description>Read in Excel file, save contents to different DB tables</description>
 	<url/>
