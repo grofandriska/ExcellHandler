@@ -24,7 +24,7 @@ public class SheetService {
     public Optional<Sheet> findBySheetId(Long id) {
         return repository.findById(id);
     }
-    public Sheet createSheet(String sheetName, Excel excel) {
+    public Sheet createAndSaveSheet(String sheetName, Excel excel) {
         Sheet sheet = new Sheet();
         sheet.setSheetName(sheetName);
         sheet.setExcel(excel);

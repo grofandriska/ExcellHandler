@@ -26,7 +26,7 @@ public class SheetColumnService {
         this.repository = repository;
     }
 
-    public List<SheetColumn> createAndSave(org.apache.poi.ss.usermodel.Sheet sheet, Sheet sheetColumnSheet){
+    public List<SheetColumn> createAndSaveSheetColumn(org.apache.poi.ss.usermodel.Sheet sheet, Sheet sheetColumnSheet){
         SheetColumn sheetColumn;
         Row row = sheet.getRow(0);
         List<SheetColumn> sheetColumnList = new ArrayList<>();

@@ -10,9 +10,6 @@ import hu.multialarm.excelhandler.service.SheetColumnService;
 import hu.multialarm.excelhandler.service.SheetRowService;
 import hu.multialarm.excelhandler.service.SheetService;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.apache.poi.ss.usermodel.*;
 
 import org.springframework.stereotype.Service;
@@ -59,11 +56,11 @@ public class ExcelFileReader {
             for (int i = 0; i < numberOfSheets; i++) {
                 sheet = workbook.getSheetAt(i);
                 //Save Sheet
-                Sheet excelSheet = this.sheetService.createSheet(sheet.getSheetName(), excel);
+                Sheet excelSheet = this.sheetService.createAndSaveSheet(sheet.getSheetName(), excel);
                 //Save Columns
-                List<SheetColumn> sheetColumnList = this.sheetColumnService.createAndSave(sheet, excelSheet);
+                List<SheetColumn> sheetColumnList = this.sheetColumnService.createAndSaveSheetColumn(sheet, excelSheet);
                 //Save Rows
-                this.sheetRowService.saveSheetRows(sheet, sheetColumnList);
+                this.sheetRowService.createAndSaveSheetRows(sheet, sheetColumnList);
             }
             workbook.close();
             file.close();

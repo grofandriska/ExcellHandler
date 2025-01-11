@@ -5,8 +5,6 @@ import hu.multialarm.excelhandler.model.excel.SheetRow;
 import hu.multialarm.excelhandler.repository.SheetRowRepository;
 import hu.multialarm.excelhandler.util.CellInspector;
 import lombok.Data;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +23,7 @@ public class SheetRowService {
         this.sheetRowRepository = sheetRowRepository;
         this.cellInspector = cellInspector;
     }
-    public List<SheetRow> saveSheetRows(Sheet sheet, List<SheetColumn> sheetColumnList) {
+    public List<SheetRow> createAndSaveSheetRows(Sheet sheet, List<SheetColumn> sheetColumnList) {
         int rows = sheet.getLastRowNum();
         List<SheetRow> result = new ArrayList<>();
         for (int rowIterator = 0; rowIterator < rows; rowIterator++) {
