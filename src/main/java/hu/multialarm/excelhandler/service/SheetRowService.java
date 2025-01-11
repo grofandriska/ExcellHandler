@@ -24,9 +24,13 @@ public class SheetRowService {
         this.cellInspector = cellInspector;
     }
     public List<SheetRow> createAndSaveSheetRows(Sheet sheet, List<SheetColumn> sheetColumnList) {
+        //Count rows
         int rows = sheet.getLastRowNum();
+        //Create sheet rows
         List<SheetRow> result = new ArrayList<>();
+
         for (int rowIterator = 0; rowIterator < rows; rowIterator++) {
+            //get row Leng
             int columns = sheet.getRow(rowIterator).getLastCellNum();
             for (int cellIterator = 0; cellIterator < columns; cellIterator++) {
                 SheetRow sheetRow = new SheetRow();

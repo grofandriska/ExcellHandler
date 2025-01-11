@@ -38,6 +38,8 @@ public class ExcelRestController {
             excelFileReader.saveDataFromExcelToDatabases(file.getOriginalFilename());
 
             return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
+        } catch (IndexOutOfBoundsException ie) {
+            return ResponseEntity.status(400).body("Hibás headerek!" + ie);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Failed to upload file: " + e.getMessage());

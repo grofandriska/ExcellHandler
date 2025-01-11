@@ -31,10 +31,11 @@ public class CellInspector {
                     dataType = "Unknown";
             }
         } else {
-            throw new NullPointerException("A cella NULL volt!");
+            return "";
         }
         return dataType;
     }
+
     public String getCellValue(Cell cell) {
         String dataType;
         if (cell != null) {
@@ -59,7 +60,7 @@ public class CellInspector {
                     dataType = "Unknown";
             }
         } else {
-            throw new NullPointerException("A cella NULL volt!");
+            return "";
         }
         return dataType;
     }
