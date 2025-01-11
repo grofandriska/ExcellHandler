@@ -14,13 +14,9 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/api/excel")
 public class ExcelRestController {
-
-    private final ExcelService excelService;
     private final ExcelFileReader excelFileReader;
 
-    public ExcelRestController(ExcelService excelService,
-                               ExcelFileReader excelFileReader) {
-        this.excelService = excelService;
+    public ExcelRestController(ExcelFileReader excelFileReader) {
         this.excelFileReader = excelFileReader;
     }
 
@@ -45,35 +41,6 @@ public class ExcelRestController {
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Failed to upload file: " + e.getMessage());
-        }
-    }
-
-    @GetMapping("/find/all")
-    public ResponseEntity<?> listAllExcel() {
-        try {
-            return ResponseEntity.ok(excelService.findAll());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to retrieve excel data: " + e.getMessage());
-        }
-    }
-
-    @GetMapping("/find/{fileName}")
-    public ResponseEntity<?> findExelByFileName(@PathVariable("fileName") String fileName) {
-        try {
-            return ResponseEntity.ok(excelService.findByFilename(fileName));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to retrieve '" + fileName + "'s excel data : " + e.getMessage());
-        }
-    }
-
-    @Transactional
-    @GetMapping("/delete/{fileName}")
-    public ResponseEntity<?> deleteExcelByFilename(@PathVariable("fileName") String fileName) {
-        try {
-            excelService.deleteByFileName(fileName);
-            return ResponseEntity.ok("Excel with filename: " + fileName + " was deleted successfully!");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to delete excel data in '" + fileName + "' !See log:\n" + e.getMessage());
         }
     }
 }

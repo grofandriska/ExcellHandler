@@ -1,27 +1,27 @@
-#                                              Excel Handler 
-#                                          Author : András Gróf
+                                          Author : András Gróf
+                                              
+#                                            Excel Handler 
                                           
- 
+
 ----------------------------------------------------------------------------------------------------------------
-                                             # Change Log: 
+                                              Change Log 
 
 
-# 0.7.5
+# 0.8.0
 
-- Domain localhost:8080/api/excel/index
+- Domain localhost: **_8080/api/excel/index_**
 
-- **Refactors**: boilerplate and unused classes and codes were removed (Converter class, Controller classes,Service class and methods...)
+- **Refactors**: boilerplate and unused classes and codes were removed (Converter class, Controller classes,Service class and methods ...)
 
 - **ExcelFileReader** util class created with and businessLogic(DB Save) moved into saveDataFromExcelToDatabases() {}
   where: '**Excel**' - '**Sheet**' - '**SheetColumn**' - '**SheetRow**' ~ '**service**' methods called (save)
  
-- **ExelService** was extended: createExcelAndSave (String pathName) {} -> calls repository**.save()**
+- **ExelService** was extended: createExcelAndSave (String pathName) {} -> calls **repository.save()**
 
 - **CellInspector** util class created for reading and getting each cell's type and value
 
 - **Minor SheetColumnService change** : createAndSave (Sheet sheet, Sheet sheetColumnSheet){}
     
-
 
 
 # 0.3.8
